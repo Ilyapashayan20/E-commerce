@@ -1,6 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import { loginValidation, registerValidation } from "./validations/validations.js";
+import { login,register,getMe } from "./controllers/UserController.js";
+import handleValidationErrors from "./utils/handleValidationErrors.js";
+
+import checkAuth from './utils/checkAuth.js'
 
 
 dotenv.config();
@@ -15,9 +20,12 @@ mongoose.connect(process.env.DB_URL,)
 
 
 
-app.get("/", (req, res) => {
-    res.send("Etsy Dashboard");
-})
+app.get("/", (req, res) => {res.send("Etsy Dashboard")})
+
+
+app.post("/login", loginValidation,handleValidationErrors,login)
+app.post("/register", registerValidation,handleValidationErrors,register)
+app.get('/me',checkAuth,getMe)
 
 
 app.listen(process.env.PORT , (err) => {

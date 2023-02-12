@@ -17,8 +17,7 @@ const userSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['admin', 'manager'],
-    required: true
+    default: "admin"
   },
   avatarUrl: String,
   
@@ -30,4 +29,4 @@ const userSchema = new Schema({
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+export default  User;

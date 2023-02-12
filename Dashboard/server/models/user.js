@@ -11,7 +11,7 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
-  password: {
+  passwordHash: {
     type: String,
     required: true
   },
@@ -19,8 +19,14 @@ const userSchema = new Schema({
     type: String,
     enum: ['admin', 'manager'],
     required: true
-  }
-});
+  },
+  avatarUrl: String,
+  
+},
+{
+    timestamps: true,
+}
+);
 
 const User = mongoose.model('User', userSchema);
 

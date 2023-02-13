@@ -6,6 +6,7 @@ import { login,register,getMe } from "./controllers/UserController.js";
 import handleValidationErrors from "./utils/handleValidationErrors.js";
 
 import checkAuth from './utils/checkAuth.js'
+import { create } from "./controllers/Product/ProductController.js";
 
 
 dotenv.config();
@@ -26,6 +27,8 @@ app.get("/", (req, res) => {res.send("Etsy Dashboard")})
 app.post("/login", loginValidation,handleValidationErrors,login)
 app.post("/register", registerValidation,handleValidationErrors,register)
 app.get('/me',checkAuth,getMe)
+
+app.post("/create", checkAuth , create)
 
 
 app.listen(process.env.PORT , (err) => {

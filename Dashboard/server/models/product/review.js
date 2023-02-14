@@ -23,6 +23,6 @@ const reviewSchema = new Schema({
     timestamps: true
 });
 
-const Review = mongoose.model('Image', reviewSchema);
+const Review = mongoose.model('Review', reviewSchema);
 
 export default Review;

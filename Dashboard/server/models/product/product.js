@@ -28,6 +28,37 @@ const optionSchema = new Schema({
 });
 
 
+const imageSchema = new Schema({
+    imageUrl: {
+      type: Array,
+    },
+    productId: {
+      type: Schema.Types.ObjectId,
+      ref: 'Product',
+      required: false,
+    }
+  });
+
+  const reviewSchema = new Schema({
+    message:{
+        type: String
+    },
+    rating: {
+        type: Number
+    },
+    imagesReview:{
+        type: Array,
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: false
+    },
+},
+{
+    timestamps: true
+});
+
 const productSchema = new Schema({
     title: {
         type: String,
@@ -72,18 +103,8 @@ const productSchema = new Schema({
         ref: 'User',
         required: true
     },
-    reviews: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Review'
-        }
-    ],
-    imagesURL: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Image'
-        }
-    ],
+    reviews: [reviewSchema],
+    images: imageSchema
 },
     {
         timestamps: true

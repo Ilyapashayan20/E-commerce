@@ -1,6 +1,28 @@
 import ProductModel from "../../models/product/product.js"
 
 
+
+export const getProduct = async (req,res) =>{
+    try{
+
+        const productID = req.params.id
+        
+        const product = await ProductModel.findById(productID)
+
+        if(!product){
+            return res.status(404).json({message: "Product not found"})
+        }
+
+        res.json(product)
+
+    }catch(e){
+        console.log(e)
+        ret.status(500).json({message:e.message})
+    }
+
+}
+
+
 export const create = async (req,res) =>{
     try{
         const doc = new ProductModel({
@@ -13,7 +35,7 @@ export const create = async (req,res) =>{
             quality: req.body.quality,
             tags: req.body.tags,
             reviews: req.body.reviews,
-            imagesURL: req.body.imagesURL,
+            images: req.body.images,
             user: req.userId,
         })
 

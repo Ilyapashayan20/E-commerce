@@ -77,8 +77,14 @@ const productSchema = new Schema({
         required: true
     },
     category: {
-        type:Array,
-        default:[]
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ParentCategory",
+        required: true,
+    },
+    subCategory: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SubCategory",
+        required:true
     },
     option: [optionSchema],
     quality: {

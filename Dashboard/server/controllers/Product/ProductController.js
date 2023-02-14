@@ -2,6 +2,19 @@ import ProductModel from "../../models/product/product.js"
 
 
 
+export const getProducts = async (req,res) =>{
+    try{
+        const products = await ProductModel.find().select("title price images quality category sales").populate("user", "name avatarUrl").exec();
+
+
+        res.json(products)
+    } catch(e){
+        console.log(e);
+        res.status(500).json({message: e.message})
+    }
+}
+
+
 export const getProduct = async (req,res) =>{
     try{
 
@@ -17,7 +30,7 @@ export const getProduct = async (req,res) =>{
 
     }catch(e){
         console.log(e)
-        ret.status(500).json({message:e.message})
+        res.status(500).json({message:e.message})
     }
 
 }

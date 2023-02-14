@@ -4,9 +4,9 @@ import mongoose from "mongoose";
 import { loginValidation, registerValidation } from "./validations/validations.js";
 import { login,register,getMe } from "./controllers/UserController.js";
 import handleValidationErrors from "./utils/handleValidationErrors.js";
-
 import checkAuth from './utils/checkAuth.js'
-import { create } from "./controllers/Product/ProductController.js";
+import { create, getProduct,getProducts } from "./controllers/Product/ProductController.js";
+import { createCategory, getCategories } from "./controllers/Category/CategoryController.js";
 
 
 dotenv.config();
@@ -28,7 +28,12 @@ app.post("/login", loginValidation,handleValidationErrors,login)
 app.post("/register", registerValidation,handleValidationErrors,register)
 app.get('/me',checkAuth,getMe)
 
+app.get("/products", getProducts)
+app.get("/products/:id", getProduct)
 app.post("/create", checkAuth , create)
+
+app.get("/categories", getCategories)
+app.post("/category", checkAuth, createCategory)
 
 
 app.listen(process.env.PORT , (err) => {
